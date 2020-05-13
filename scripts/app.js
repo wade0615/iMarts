@@ -11,6 +11,7 @@ var app = new Vue({
     self.scanner = new Instascan.Scanner({ video: document.getElementById('preview'), scanPeriod: 5 });
     self.scanner.addListener('scan', function (content, image) {
       self.scans.unshift({ date: +(Date.now()), content: content });
+      alert('content',scan.content);
     });
     Instascan.Camera.getCameras().then(function (cameras) {//取得設備的相機數目
       self.cameras = cameras;
