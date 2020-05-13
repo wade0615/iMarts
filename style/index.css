@@ -117,5 +117,9 @@ body, html {
   display: flex;
   width: 100%;
   overflow: hidden;
+  transform: scaleX(-1);
+  -moz-transform: scaleX(-1);
+  -webkit-transform: scaleX(-1);
+  -o-transform: scaleX(-1);
 }
 /*# sourceMappingURL=index.css.map */
