@@ -1,4 +1,5 @@
 const path = require('path');
+
 module.exports = {
     entry: './package.js',//entry：是我們的進入點，現在指定路徑是 index.js
     output: {
@@ -25,4 +26,4 @@ module.exports = {
             }
         ]
     }
-};
+};``
