@@ -11,11 +11,45 @@
 </head>
 <body>
     <h1>iMarts</h1>
-    
+    <video id="preview"></video>
+    <!-- 詢問是否允許開啟相機後，會顯示在這個元素裡 -->
+    <!-- ---------- -->
+    <!-- 引入instascan -->
+    <script type="text/javascript" src="./scripts/instascan.min.js"></script>
+    <!-- 以下程式面 -->
+    <script type="text/javascript">
+    let scanner = new Instascan.Scanner({
+        video: document.getElementById('preview')
+    });
+    // 開啟一個新的掃描
+    // 宣告變數scanner，在html<video>標籤id為preview的地方開啟相機預覽。
+    // Notice:這邊注意一定要用<video>的標籤才能使用，詳情請看他的github API的部分解釋。
+
+    scanner.addListener('scan', function(content) {
+        console.log(content);
+    });
+    //開始偵聽掃描事件，若有偵聽到印出內容。
+
+    Instascan.Camera.getCameras().then(function(cameras) {
+    //取得設備的相機數目
+        if (cameras.length > 0) {
+          ///若設備相機數目大於0 則先開啟第0個相機(程式的世界是從第零個開始的)
+            scanner.start(cameras[0]);
+        } else {
+          //若設備沒有相機數量則顯示"No cameras found";
+          //這裡自行判斷要寫什麼
+            console.error('No cameras found.');
+        }
+    }).catch(function(e) {
+        console.error(e);
+    });
+    </script>
+
     <!-- 引入bootstrap -->
     <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.6/umd/popper.min.js" integrity="sha384-wHAiFfRlMFy6i5SRaxvfOCifBUQy1xHdJ/yoi7FRNXMRBu5WHdZYu1hA6ZOblgut" crossorigin="anonymous"></script>
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.2.1/js/bootstrap.min.js" integrity="sha384-B0UglyR+jN6CkvvICOB2joaf5I4l3gm9GU6Hc1og6Ls7i6U/mkkaduKaBhlAXv9k" crossorigin="anonymous"></script>
+    
     <!-- 引入Vue -->
     <script src="https://cdn.jsdelivr.net/npm/vue@2.6.11"></script>
     <!-- My JS -->
