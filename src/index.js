@@ -9,7 +9,7 @@ Vue.component('scan', {
     },
     template: 
         `<section>
-            <p>點擊前往: <b><a href={{ decodedContent }}>{{ decodedContent }}</a></b></p>
+            <p>掃描後點擊前往: <b><a :href="decodedContent">{{ decodedContent }}</a></b></p>
             <p class="error">{{ errorMessage }}</p>
             <qrcode-stream @decode="onDecode" @init="onInit" class="view_md"></qrcode-stream>
         </section>`,
