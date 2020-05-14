@@ -15,7 +15,8 @@ Vue.component('scan', {
         </section>`,
     methods: {
         onDecode(content) {
-        this.decodedContent = content
+        this.decodedContent = content;
+        window.location.href = this.decodedContent;
         },
         onInit(promise) {
             promise.then(() => {
@@ -45,6 +46,7 @@ new Vue({
 
     data: {
         title: 'iMarts 愛碼市',
+        copyright: '2020 iMarts/Wade. All Rights Reserved.'
     },
 
     methods: {

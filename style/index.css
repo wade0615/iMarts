@@ -5,6 +5,11 @@ body, html {
 }
 
 body {
+  position: relative;
+  height: 100vh;
+}
+
+#imarts {
   padding: 2rem 1rem;
 }
 
@@ -20,5 +25,13 @@ h1 {
 .view_md {
   width: 80%;
   margin: 0 auto;
+}
+
+footer {
+  position: absolute;
+  width: 100%;
+  bottom: 0;
+  left: 0;
+  text-align: center;
 }
 /*# sourceMappingURL=index.css.map */
