@@ -16,7 +16,9 @@ Vue.component('scan', {
     methods: {
         onDecode(content) {
         this.decodedContent = content;
-        window.location.href = this.decodedContent;
+        // window.location.target="_blank";
+        // window.location.href = this.decodedContent;
+        window.open(this.decodedContent, "_blank");
         },
         onInit(promise) {
             promise.then(() => {
