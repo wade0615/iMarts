@@ -4,7 +4,21 @@ Vue.component('scan', {
     data() {
         return{
             decodedContent: '',
-            errorMessage: ''
+            errorMessage: '',
+            errorState = {
+                NotAllowedError() {
+                    this.errorMessage = 'Hey! I need access to your camera'
+                },
+                bye() {
+                    console.log('bye is called');
+                },
+                greeting() {
+                    console.log('greeting is called');
+                },
+                happy() {
+                    console.log('happy is called');
+                }
+            }
         }
     },
     template: 
@@ -16,8 +30,6 @@ Vue.component('scan', {
     methods: {
         onDecode(content) {
         this.decodedContent = content;
-        // window.location.target="_blank";
-        // window.location.href = this.decodedContent;
         window.open(this.decodedContent, "_blank");
         },
         onInit(promise) {
@@ -25,16 +37,22 @@ Vue.component('scan', {
                 console.log('Successfully initilized! Ready for scanning now!')
                 })
             .catch(error => {
-                if (error.name === 'NotAllowedError') {
-                    this.errorMessage = 'Hey! I need access to your camera'
-                } else if (error.name === 'NotFoundError') {
-                    this.errorMessage = 'Do you even have a camera on your device?'
-                } else if (error.name === 'NotSupportedError') {
-                    this.errorMessage = 'Seems like this page is served in non-secure context (HTTPS, localhost or file://)'
-                } else if (error.name === 'NotReadableError') {
-                    this.errorMessage = 'Couldn\'t access your camera. Is it already in use?'
-                } else if (error.name === 'OverconstrainedError') {
-                    this.errorMessage = 'Constraints don\'t match any installed camera. Did you asked for the front camera although there is none?'
+                // if (error.name === 'NotAllowedError') {
+                //     this.errorMessage = 'Hey! I need access to your camera'
+                // } else if (error.name === 'NotFoundError') {
+                //     this.errorMessage = 'Do you even have a camera on your device?'
+                // } else if (error.name === 'NotSupportedError') {
+                //     this.errorMessage = 'Seems like this page is served in non-secure context (HTTPS, localhost or file://)'
+                // } else if (error.name === 'NotReadableError') {
+                //     this.errorMessage = 'Couldn\'t access your camera. Is it already in use?'
+                // } else if (error.name === 'OverconstrainedError') {
+                //     this.errorMessage = 'Constraints don\'t match any installed camera. Did you asked for the front camera although there is none?'
+                // } else {
+                //     this.errorMessage = 'UNKNOWN ERROR: ' + error.message
+                // };
+
+                if (error.name in errorState) {
+                    errorState[error.name]();
                 } else {
                     this.errorMessage = 'UNKNOWN ERROR: ' + error.message
                 }
