@@ -5,19 +5,22 @@ Vue.component('scan', {
         return{
             decodedContent: '',
             errorMessage: '',
-            errorState = {
+            errorState: {
                 NotAllowedError() {
                     this.errorMessage = 'Hey! I need access to your camera'
                 },
-                bye() {
-                    console.log('bye is called');
+                NotFoundError() {
+                    this.errorMessage = 'Do you even have a camera on your device?'
                 },
-                greeting() {
-                    console.log('greeting is called');
+                NotSupportedError() {
+                    this.errorMessage = 'Seems like this page is served in non-secure context (HTTPS, localhost or file://)'
                 },
-                happy() {
-                    console.log('happy is called');
-                }
+                NotReadableError() {
+                    this.errorMessage = 'Couldn\'t access your camera. Is it already in use?'
+                },
+                OverconstrainedError() {
+                    this.errorMessage = 'Constraints don\'t match any installed camera. Did you asked for the front camera although there is none?'
+                },
             }
         }
     },
