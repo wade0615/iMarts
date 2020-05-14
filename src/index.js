@@ -9,9 +9,9 @@ Vue.component('scan', {
     },
     template: 
         `<section>
-            <p>Last result: <b>{{ decodedContent }}</b></p>
+            <p>Last result: <b><a href="{{ decodedContent }}">{{ decodedContent }}</a></b></p>
             <p class="error">{{ errorMessage }}</p>
-            <qrcode-stream @decode="onDecode" @init="onInit"></qrcode-stream>
+            <qrcode-stream @decode="onDecode" @init="onInit" class="view_md"></qrcode-stream>
         </section>`,
     methods: {
         onDecode(content) {
